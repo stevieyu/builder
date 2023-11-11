@@ -44,7 +44,6 @@ jobs:
 # git submodule update --init --recursive
       - name: Install dependencies 🔃
         run: |
-          
           cd happyx
           nimble refresh
           nimble install -y -d
