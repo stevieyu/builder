@@ -7,6 +7,8 @@ on:
   push:
     branches:
       - 'main'
+    paths:
+      - '**/happyx.yml'
 
 jobs:
   build:
@@ -38,11 +40,9 @@ jobs:
         with:
           python-version: ${{ matrix.python_version }}
 
-      - name: Set working directory
-        run: cd happyx
-
       - name: Install dependencies 🔃
         run: |
+          cd happyx
           nimble refresh
           nimble install -y -d
           python -m pip install --upgrade pip
@@ -50,13 +50,14 @@ jobs:
 
       # - name: node Bindings 🐍
       #   run: |
+      #     cd happyx
       #     nimble install denim
       #     cd src
       #     nim c happyx/bindings/node
 
       - name: Python Bindings 🐍
         run: |
-          cd src
+          cd happyx/src
           nim c --app:lib --out:../bindings/python/happyx/happyx.so -t:-flto -l:-flto --opt:speed --threads:on -d:ssl -d:release -d:httpx -d:export2py happyx
         shell: bash
 
@@ -64,9 +65,9 @@ jobs:
         name: Upload the happyx.so artifact
         with:
           name: happyx.so
-          path: bindings/python/happyx/happyx.so
+          path: happyx/bindings/python/happyx/happyx.so
 
       # - name: Build Package 🏗
       #   run: |
-      #     cd bindings/python
+      #     cd happyx/bindings/python
       #     python -m build
