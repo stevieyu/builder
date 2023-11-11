@@ -1,0 +1,4 @@
+[submodule "happyx"]
+	path = happyx
+	shallow = true
+	url = https://github.com/HapticX/happyx.git
