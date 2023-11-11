@@ -1,0 +1,72 @@
+name: Language Bindings 🐍
+
+permissions:
+  contents: read
+
+on:
+  push:
+    branches:
+      - 'master'
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os:
+          - ubuntu-20.04
+        nim_version:
+          - '2.0.0'
+        python_version:
+          - '3.x'
+    env:
+      TIMEOUT_EXIT_STATUS: 124
+    steps:
+      - uses: actions/checkout@v3
+      - name: Cache nimble
+        id: cache-nimble
+        uses: actions/cache@v3
+        with:
+          path: ~/.nimble
+          key: ${{ runner.os }}-nimble-${{ hashFiles('*.nimble') }}
+      - uses: jiro4989/setup-nim-action@v1
+        with:
+          nim-version: ${{ matrix.nim_version }}
+
+      - name: Set up Python 🔃
+        uses: actions/setup-python@v3
+        with:
+          python-version: ${{ matrix.python_version }}
+
+      - name: Set working directory
+        run: cd happyx
+
+      - name: Install dependencies 🔃
+        run: |
+          nimble refresh
+          nimble install -y -d
+          python -m pip install --upgrade pip
+          pip install -U twine build packaging
+
+      # - name: node Bindings 🐍
+      #   run: |
+      #     nimble install denim
+      #     cd src
+      #     nim c happyx/bindings/node
+
+      - name: Python Bindings 🐍
+        run: |
+          cd src
+          nim c --app:lib --out:../bindings/python/happyx/happyx.so -t:-flto -l:-flto --opt:speed --threads:on -d:ssl -d:release -d:httpx -d:export2py happyx
+        shell: bash
+
+      - uses: actions/upload-artifact@v3
+        name: Upload the happyx.so artifact
+        with:
+          name: happyx.so
+          path: bindings/python/happyx/happyx.so
+
+      # - name: Build Package 🏗
+      #   run: |
+      #     cd bindings/python
+      #     python -m build
