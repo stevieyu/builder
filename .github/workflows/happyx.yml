@@ -68,7 +68,7 @@ jobs:
         name: Upload the happyx.so artifact
         with:
           name: happyx.so
-          path: bindings/python/happyx/happyx.so
+          path: happyx/bindings/python/happyx/happyx.so
 
       # - name: Build Package 🏗
       #   run: |
