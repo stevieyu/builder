@@ -43,7 +43,7 @@ jobs:
           nim-version: ${{ matrix.nim_version }}
 
       - name: Set up Python 🔃
-        uses: actions/setup-python@v3
+        uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python_version }}
       - name: Install dependencies 🔃
@@ -65,7 +65,7 @@ jobs:
           nim c --app:lib --out:../bindings/python/happyx/happyx.so -t:-flto -l:-flto --opt:speed --threads:on -d:ssl -d:release -d:httpx -d:export2py happyx
         shell: bash
 
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         name: Upload the happyx.so artifact
         with:
           name: happyx.so
