@@ -2,3 +2,7 @@
 	path = happyx
 	shallow = true
 	url = https://github.com/HapticX/happyx.git
+[submodule "winterjs"]
+	path = winterjs
+	shallow = true
+	url = https://gh.dgcf.link/github.com/wasmerio/winterjs.git
