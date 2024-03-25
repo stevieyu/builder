@@ -34,7 +34,7 @@ jobs:
           submodules: true
       - name: Cache nimble
         id: cache-nimble
-        uses: actions/cache@v3
+        uses: actions/cache@v
         with:
           path: ~/.nimble
           key: ${{ runner.os }}-nimble-${{ hashFiles('*.nimble') }}

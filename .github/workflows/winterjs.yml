@@ -1,0 +1,47 @@
+name: winterjs Bindings 🐍
+
+permissions:
+  contents: read
+
+on:
+  push:
+    branches:
+      - 'main'
+    paths:
+      - winterjs
+      - '**/winterjs.yml'
+
+defaults:
+  run:
+    working-directory: winterjs
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        features: ["--features debugmozjs", ""]
+        os:
+          - ubuntu-20.04
+    env:
+      RUST_BACKTRACE: 1
+      SHELL: /bin/bash
+      CARGO_INCREMENTAL: 0
+      RUSTC_WRAPPER: "sccache"
+      CCACHE: sccache
+      SCCACHE_GHA_ENABLED: "true"
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: true
+      - uses: dtolnay/rust-toolchain@stable
+      - name: Install deps
+        run: |
+          sudo apt install llvm -y
+      - name: Run sccache-cache
+        uses: mozilla-actions/sccache-action@v0.0.3
+      - name: Build
+        run: |
+          cargo build --verbose ${{ matrix.features }}
+          cargo test --verbose ${{ matrix.features }}
