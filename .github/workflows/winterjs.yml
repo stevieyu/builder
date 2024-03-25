@@ -41,5 +41,5 @@ jobs:
         uses: mozilla-actions/sccache-action@v0.0.3
       - name: Build
         run: |
-          cargo build -r
+          cargo build -r --features debugmozjs
           ls -l target
