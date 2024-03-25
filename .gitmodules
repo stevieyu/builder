@@ -3,8 +3,4 @@
 	shallow = true
 	branch = master
 	url = https://github.com/HapticX/happyx.git
-[submodule "winterjs"]
-	path = winterjs
-	shallow = true
-	branch = main
-	url = https://gh.dgcf.link/github.com/wasmerio/winterjs.git
+
