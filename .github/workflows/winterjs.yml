@@ -21,7 +21,7 @@ jobs:
     strategy:
       matrix:
         os:
-          - ubuntu-22.04
+          - ubuntu-latest
     env:
       RUST_BACKTRACE: 1
       SHELL: /bin/bash
@@ -41,5 +41,5 @@ jobs:
         uses: mozilla-actions/sccache-action@v0.0.3
       - name: Build
         run: |
-          cargo build -r --features debugmozjs
+          cargo build --release -- ./simple.js
           ls -l target
