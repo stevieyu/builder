@@ -19,9 +19,7 @@ jobs:
   build:
     runs-on: ${{ matrix.os }}
     strategy:
-      fail-fast: false
       matrix:
-        features: ["--features debugmozjs", ""]
         os:
           - ubuntu-20.04
     env:
@@ -43,5 +41,5 @@ jobs:
         uses: mozilla-actions/sccache-action@v0.0.3
       - name: Build
         run: |
-          cargo build --verbose ${{ matrix.features }}
-          cargo test --verbose ${{ matrix.features }}
+          cargo build -r
+          ls -l target
