@@ -41,5 +41,5 @@ jobs:
         uses: mozilla-actions/sccache-action@v0.0.3
       - name: Build
         run: |
-          cargo build --release -- ./simple.js
+          cargo build --release
           ls -l target
