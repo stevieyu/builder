@@ -1,0 +1,55 @@
+name: vvdec wasm build
+
+permissions:
+  contents: read
+
+on:
+  push:
+    branches:
+      - 'main'
+    paths:
+      - vvdec
+      - '**/vvdec.yml'
+
+defaults:
+  run:
+    working-directory: vvdec
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os:
+          - ubuntu-20.04
+        emsdk_version:
+          - '3.1.26'
+  
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: true
+
+      - name: Setup cache
+        id: cache-system-libraries
+        uses: actions/cache@v4
+        with:
+          path: emsdk-cache
+          key: ${{matrix.emsdk_version}}-${{ runner.os }}
+
+      - uses: mymindstorm/setup-emsdk@v14
+        with:
+          version: ${{matrix.emsdk_version}}
+          actions-cache-folder: emsdk-cache
+
+      - name: build
+        run: |
+          emcmake cmake -B build/wasm
+          cmake --build build/wasm
+
+      - uses: actions/upload-artifact@v4
+        name: Upload the artifact
+        with:
+          name: vvdec-wasm
+          path: bin/release-static
+
