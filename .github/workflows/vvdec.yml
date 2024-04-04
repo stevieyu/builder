@@ -51,5 +51,5 @@ jobs:
         name: Upload the artifact
         with:
           name: vvdec-wasm
-          path: bin/release-static
+          path: vvdec/bin/release-static
 
