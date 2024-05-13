@@ -33,9 +33,14 @@ jobs:
           submodules: true
 
       - uses: dtolnay/rust-toolchain@stable
-      - name: Install deps
-        run: |
-          sudo apt install llvm -y
+      
+      - name: Install LLVM and Clang
+        uses: KyleMayes/install-llvm-action@v2
+        # with:
+          # version: "10.0"
+      # - name: Install deps
+      #   run: |
+      #     sudo apt install llvm -y
       - name: Run sccache-cache
         uses: mozilla-actions/sccache-action@v0.0.4
       - name: Build
@@ -46,6 +51,6 @@ jobs:
         name: Upload the artifact
         with:
           name: winterjs
-          path: target/release/winterjs
+          path: winterjs/target/release/winterjs
  
 
