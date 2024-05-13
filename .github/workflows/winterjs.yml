@@ -41,6 +41,7 @@ jobs:
       - name: Build
         run: |
           cargo build --release
+          ls -l target
 
  
 
