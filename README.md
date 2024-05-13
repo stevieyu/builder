@@ -10,3 +10,11 @@ curl -sSf https://raw.githubusercontent.com/nektos/act/master/install.sh | sudo 
 ## TODO
 
 - [whisper.cpp](https://github.com/stevieyu/whisper.cpp)
+
+
+### temp
+
+```
+sudo apt-get install build-essential python3 python3-distutils llvm libclang-dev clang
+cargo build --release
+```
