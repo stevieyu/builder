@@ -21,7 +21,7 @@ jobs:
     strategy:
       matrix:
         os:
-          - ubuntu-20.04
+          - ubuntu-latest
     env:
       RUSTC_WRAPPER: "sccache"
       CCACHE: sccache
@@ -37,7 +37,7 @@ jobs:
       - name: Install LLVM and Clang
         uses: KyleMayes/install-llvm-action@v2
         with:
-          version: "10"
+          version: "18.1"
       # - name: Install deps
       #   run: |
       #     sudo apt install llvm -y
