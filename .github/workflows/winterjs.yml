@@ -43,6 +43,10 @@ jobs:
         uses: mozilla-actions/sccache-action@v0.0.4
       - name: Build
         run: |
+          echo '[profile.release]' >> Cargo.toml
+          echo 'strip = true' >> Cargo.toml
+          echo 'lto = true' >> Cargo.toml
+          cat Cargo.toml
           cargo build --release
   
       - uses: actions/upload-artifact@v4
