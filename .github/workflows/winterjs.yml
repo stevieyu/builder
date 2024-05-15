@@ -55,7 +55,7 @@ jobs:
         uses: svenstaro/upx-action@v2
         with:
           files: |
-              target/release/winterjs
+              winterjs/target/release/winterjs
           args: --best --lzma
           strip: true
 
