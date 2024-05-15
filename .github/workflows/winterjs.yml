@@ -46,7 +46,8 @@ jobs:
           echo '[profile.release]' >> Cargo.toml
           echo 'codegen-units = 1' >> Cargo.toml
           echo 'strip = true' >> Cargo.toml
-          echo 'lto = true' >> Cargo.toml
+          echo 'lto = "fat"' >> Cargo.toml
+          echo 'opt-level = "s"' >> Cargo.toml
           cat Cargo.toml
           cargo build --release
   
