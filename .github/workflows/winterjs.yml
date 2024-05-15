@@ -44,6 +44,7 @@ jobs:
       - name: Build
         run: |
           echo '[profile.release]' >> Cargo.toml
+          echo 'codegen-units = 1' >> Cargo.toml
           echo 'strip = true' >> Cargo.toml
           echo 'lto = true' >> Cargo.toml
           cat Cargo.toml
