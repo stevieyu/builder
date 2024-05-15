@@ -48,6 +48,7 @@ jobs:
           echo 'strip = true' >> Cargo.toml
           echo 'lto = "fat"' >> Cargo.toml
           echo 'opt-level = "s"' >> Cargo.toml
+          echo 'rustflags = ["-C", "target-cpu=native"]' >> Cargo.toml
           cat Cargo.toml
           cargo build --release
   
