@@ -29,6 +29,11 @@ emcmake cmake -B build/wasm
 cmake --build build/wasm
 
 
+# axel -k -o /tmp/tmp.tar.gz url && tar -vxz -C /workspace /tmp/tmp.tar.gz
+
+
+# curl -kL https://github.com/tinygo-org/tinygo/releases/download/v0.31.2/tinygo0.31.2.linux-amd64.tar.gz | tar -vxz -C /workspace
+# export PATH=/workspace/tinygo/bin:$PATH
 
 
 # curl -kL https://github.com/WebAssembly/wabt/releases/download/1.0.34/wabt-1.0.34-ubuntu.tar.gz | tar -vxz -C /workspace
