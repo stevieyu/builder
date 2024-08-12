@@ -1,45 +1,45 @@
 name: Build Single Popular App
 on:
-  workflow_dispatch:
-    inputs:
-      name:
-        description: 'app name'
-        required: true
-        default: 'twitter'
-      title:
-        description: 'app title'
-        required: true
-        default: 'Twitter'
-      name_zh:
-        description: 'app name in Chinese'
-        required: true
-        default: '推特'
-      url:
-        description: 'app url'
-        required: true
-        default: 'https://twitter.com/'
-  workflow_call:
-    inputs:
-      name:
-        description: 'app name'
-        type: string
-        required: true
-        default: 'twitter'
-      title:
-        description: 'app title'
-        required: true
-        type: string
-        default: 'Twitter'
-      name_zh:
-        description: 'app name in Chinese'
-        required: true
-        type: string
-        default: '推特'
-      url:
-        description: 'app url'
-        required: true
-        type: string
-        default: 'https://twitter.com/'
+  # workflow_dispatch:
+  #   inputs:
+  #     name:
+  #       description: 'app name'
+  #       required: true
+  #       default: 'twitter'
+  #     title:
+  #       description: 'app title'
+  #       required: true
+  #       default: 'Twitter'
+  #     name_zh:
+  #       description: 'app name in Chinese'
+  #       required: true
+  #       default: '推特'
+  #     url:
+  #       description: 'app url'
+  #       required: true
+  #       default: 'https://twitter.com/'
+  # workflow_call:
+  #   inputs:
+  #     name:
+  #       description: 'app name'
+  #       type: string
+  #       required: true
+  #       default: 'twitter'
+  #     title:
+  #       description: 'app title'
+  #       required: true
+  #       type: string
+  #       default: 'Twitter'
+  #     name_zh:
+  #       description: 'app name in Chinese'
+  #       required: true
+  #       type: string
+  #       default: '推特'
+  #     url:
+  #       description: 'app url'
+  #       required: true
+  #       type: string
+  #       default: 'https://twitter.com/'
 
 jobs:
   build_single_app:
