@@ -93,6 +93,7 @@ jobs:
             ~/.cargo/registry/cache/
             ~/.cargo/git/db/
             ~/.npm/
+            C:\npm\
           key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
 
       # - name: Config App
@@ -128,6 +129,13 @@ jobs:
           npm install -g pake-cli
           pake https://weekly.tw93.fun --name Weekly --hide-title-bar
           npm config list -g
+
+
+      - uses: actions/upload-artifact@v4
+        name: Upload the artifact
+        with:
+          name: Weekly_1.0.0_x64_en-US.msi
+          path: C:\npm\prefix\node_modules\pake-cli\src-tauri\target\release\bundle\msi\Weekly_1.0.0_x64_en-US.msi
 
           
       # - name: Restore Cargo Lock File(Windows Only)
