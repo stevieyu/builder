@@ -1,5 +1,10 @@
 name: Build Single Popular App
 on:
+  push:
+    branches:
+      - 'main'
+    paths:
+      - '**/pake.yml'
   # workflow_dispatch:
   #   inputs:
   #     name:
