@@ -52,23 +52,23 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        build: [linux, macos, windows]
+        build: [macos]
         include:
-          - build: linux
-            os: ubuntu-latest
-            rust: stable
-            target: x86_64-unknown-linux-musl
+          # - build: linux
+          #   os: ubuntu-latest
+          #   rust: stable
+          #   target: x86_64-unknown-linux-musl
           - build: windows
             os: windows-latest
             rust: stable-x86_64-msvc
             target: x86_64-pc-windows-msvc
-          - build: macos
-            os: macos-latest
-            rust: stable
-            target: x86_64-apple-darwin
+          # - build: macos
+          #   os: macos-latest
+          #   rust: stable
+          #   target: x86_64-apple-darwin
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Install Rust
         uses: dtolnay/rust-toolchain@stable
@@ -76,16 +76,16 @@ jobs:
           toolchain: ${{ matrix.rust }}
           target: ${{ matrix.target }}
 
-      - name: Install dependencies (ubuntu only)
-        if: matrix.os == 'ubuntu-latest'
-        uses: awalsh128/cache-apt-pkgs-action@latest
-        with:
-          packages: libwebkit2gtk-4.0-dev build-essential curl wget libssl-dev libgtk-3-dev libayatana-appindicator3-dev librsvg2-dev gnome-video-effects gnome-video-effects-extra
-          version: 1.1
+      # - name: Install dependencies (ubuntu only)
+      #   if: matrix.os == 'ubuntu-latest'
+      #   uses: awalsh128/cache-apt-pkgs-action@latest
+      #   with:
+      #     packages: libwebkit2gtk-4.0-dev build-essential curl wget libssl-dev libgtk-3-dev libayatana-appindicator3-dev librsvg2-dev gnome-video-effects gnome-video-effects-extra
+      #     version: 1.1
 
-      - name: Rust cache restore
+      - name: Cache store
         id: cache_store
-        uses: actions/cache/restore@v3
+        uses: actions/cache@v4
         with:
           path: |
             ~/.cargo/bin/
@@ -135,16 +135,16 @@ jobs:
       #   run: |
       #     git checkout -- src-tauri/Cargo.lock
 
-      - name: Rust cache store
-        uses: actions/cache/save@v3
-        with:
-          path: |
-            ~/.cargo/bin/
-            ~/.cargo/registry/index/
-            ~/.cargo/registry/cache/
-            ~/.cargo/git/db/
-            src-tauri/target/
-          key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
+      # - name: Rust cache store
+      #   uses: actions/cache/save@v3
+      #   with:
+      #     path: |
+      #       ~/.cargo/bin/
+      #       ~/.cargo/registry/index/
+      #       ~/.cargo/registry/cache/
+      #       ~/.cargo/git/db/
+      #       src-tauri/target/
+      #     key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
 
       # - name: Upload For Single Build
       #   uses: actions/upload-artifact@v3
