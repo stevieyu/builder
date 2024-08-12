@@ -48,11 +48,11 @@ on:
 
 jobs:
   build_single_app:
-    name: ${{ inputs.title }} (${{ matrix.os }})
+    name: ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        build: [macos]
+        build: [windows]
         include:
           # - build: linux
           #   os: ubuntu-latest
