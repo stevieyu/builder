@@ -64,6 +64,6 @@ jobs:
         name: Upload the artifact
         with:
           name: winterjs
-          path: winterjs/target/release/winterjs
+          path: ./target/release/winterjs
  
 

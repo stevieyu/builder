@@ -8,12 +8,12 @@ on:
     branches:
       - 'main'
     paths:
-      - restfox
+      - Restfox
       - '**/restfox.yml'
 
 defaults:
   run:
-    working-directory: restfox
+    working-directory: Restfox
 
 jobs:
   publish-app:
@@ -67,21 +67,22 @@ jobs:
         run: |
           npm ci
           npm run build-desktop
-
+        
       - name: Rust cache
         uses: swatinem/rust-cache@v2
-        working-directory: ./packages/tauri
         with:
-          workspaces: './src-tauri -> target'
+          workspaces: './packages/tauri/src-tauri -> target'
 
-      - uses: tauri-apps/tauri-action@v0
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tagName: app-v__VERSION__ # the action automatically replaces \_\_VERSION\_\_ with the app version.
-          releaseName: 'App v__VERSION__'
-          releaseBody: 'See the assets to download this version and install.'
-          releaseDraft: true
-          prerelease: false
-          args: ${{ matrix.args }}
+      - name: Build tauri
+        working-directory: ./packages/tauri
+        run: |
+          npm ci
+          npm run build
+
+      # - uses: actions/upload-artifact@v4
+      #   name: Upload the artifact
+      #   with:
+      #     name: winterjs
+      #     path: ./packages/tauri/src-tauri/target/release
+
 
