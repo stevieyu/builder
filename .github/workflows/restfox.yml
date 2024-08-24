@@ -73,10 +73,10 @@ jobs:
           npm ci
           npm run build
 
-      # - uses: actions/upload-artifact@v4
-      #   name: Upload the artifact
-      #   with:
-      #     name: winterjs
-      #     path: ./packages/tauri/src-tauri/target/release
+      - uses: actions/upload-artifact@v4
+        name: Upload the artifact
+        with:
+          name: winterjs
+          path: Restfox\packages\tauri\src-tauri\target\release\bundle/msi/Restfox_0.1.0_x64_en-US.msi
 
 
