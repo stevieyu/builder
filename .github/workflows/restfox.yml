@@ -62,13 +62,12 @@ jobs:
           cd ./Restfox/packages/ui
           npm ci
           npm run build-desktop
+          cd ../../../Restfox/packages/tauri
 
       - name: Rust cache
         uses: swatinem/rust-cache@v2
         with:
           workspaces: './Restfox/packages/tauri/src-tauri -> target'
-        run: |
-          cd ./Restfox/packages/tauri
 
       - uses: tauri-apps/tauri-action@v0
         env:
