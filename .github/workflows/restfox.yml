@@ -50,19 +50,15 @@ jobs:
         with:
           targets: ${{ matrix.platform == 'macos-latest' && 'aarch64-apple-darwin,x86_64-apple-darwin' || '' }}
 
-      - name: clone sub git
-        run: |
-          git clone --depth=1 https://github.com/flawiddsouza/Restfox.git
-
       - name: Install Node.js
         uses: actions/setup-node@v4
-        working-directory: ./Restfox/packages/ui
         with:
           node-version: lts/*
           cache: 'npm'
 
       - name: Build UI
         run: |
+          git clone --depth=1 https://github.com/flawiddsouza/Restfox.git
           npm ci
           npm run build-desktop
 
