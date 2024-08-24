@@ -53,29 +53,25 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: lts/*
-          # cache: 'npm'
-          # cache-dependency-path: Restfox\packages\ui\package-lock.json
+          cache: 'npm'
+          cache-dependency-path: Restfox\packages\ui\package-lock.json
 
-      - name: run test
+      - name: Build UI
+        working-directory: ./Restfox/packages/ui
         run: |
-          dir
-
-      # - name: Build UI
-      #   run: |
-      #     cd packages\ui
-      #     npm ci
-      #     npm run build-desktop
+          npm ci
+          npm run build-desktop
         
-      # - name: Rust cache
-      #   uses: swatinem/rust-cache@v2
-      #   with:
-      #     workspaces: './packages/tauri/src-tauri -> target'
+      - name: Rust cache
+        uses: swatinem/rust-cache@v2
+        with:
+          workspaces: './Restfox/packages/tauri/src-tauri -> target'
 
-      # - name: Build tauri
-      #   run: |
-      #     cd packages\tauri
-      #     npm ci
-      #     npm run build
+      - name: Build tauri
+        working-directory: ./Restfox/packages/tauri
+        run: |
+          npm ci
+          npm run build
 
       # - uses: actions/upload-artifact@v4
       #   name: Upload the artifact
