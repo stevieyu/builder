@@ -59,14 +59,16 @@ jobs:
       - name: Build UI
         run: |
           git clone --depth=1 https://github.com/flawiddsouza/Restfox.git
+          cd ./Restfox/packages/ui
           npm ci
           npm run build-desktop
 
       - name: Rust cache
         uses: swatinem/rust-cache@v2
-        working-directory: ./packages/tauri
         with:
-          workspaces: './src-tauri -> target'
+          workspaces: './Restfox/packages/tauri/src-tauri -> target'
+        run: |
+          cd ./Restfox/packages/tauri
 
       - uses: tauri-apps/tauri-action@v0
         env:
