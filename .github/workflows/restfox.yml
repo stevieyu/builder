@@ -8,12 +8,12 @@ on:
     branches:
       - 'main'
     paths:
-      - Restfox
+      - restfox
       - '**/restfox.yml'
 
 defaults:
   run:
-    working-directory: Restfox
+    working-directory: restfox
 
 jobs:
   publish-app:
@@ -58,7 +58,7 @@ jobs:
           # cache-dependency-path: Restfox\packages\ui\package-lock.json
 
       - name: run test
-        working-directory: ./Restfox/packages/ui
+        working-directory: ./restfox/packages/ui
         run: |
           pwd
 
