@@ -37,8 +37,6 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-        run: |
-          git clone --depth=1 https://github.com/flawiddsouza/Restfox.git
 
       - name: Install dependencies (ubuntu only)
         if: matrix.platform == 'ubuntu-latest'
@@ -51,6 +49,10 @@ jobs:
         uses: dtolnay/rust-toolchain@stable # Set this to dtolnay/rust-toolchain@nightly
         with:
           targets: ${{ matrix.platform == 'macos-latest' && 'aarch64-apple-darwin,x86_64-apple-darwin' || '' }}
+
+      - name: clone sub git
+        run: |
+          git clone --depth=1 https://github.com/flawiddsouza/Restfox.git
 
       - name: Install Node.js
         uses: actions/setup-node@v4
