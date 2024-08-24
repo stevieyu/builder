@@ -8,12 +8,12 @@ on:
     branches:
       - 'main'
     paths:
-      - restfox
+      # - restfox
       - '**/restfox.yml'
 
-defaults:
-  run:
-    working-directory: restfox
+# defaults:
+  # run:
+    # working-directory: restfox
 
 jobs:
   publish-app:
@@ -37,6 +37,8 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        run: |
+          git clone --depth=1 https://github.com/flawiddsouza/Restfox.git
 
       - name: Install dependencies (ubuntu only)
         if: matrix.platform == 'ubuntu-latest'
@@ -50,20 +52,14 @@ jobs:
         with:
           targets: ${{ matrix.platform == 'macos-latest' && 'aarch64-apple-darwin,x86_64-apple-darwin' || '' }}
 
-      - uses: pnpm/action-setup@v4
-        name: Install pnpm
-        with:
-          version: 9
-          run_install: false
-
       - name: Install Node.js
         uses: actions/setup-node@v4
+        working-directory: ./Restfox/packages/ui
         with:
           node-version: lts/*
           cache: 'npm'
 
       - name: Build UI
-        working-directory: ./packages/ui
         run: |
           npm ci
           npm run build-desktop
@@ -75,7 +71,6 @@ jobs:
           workspaces: './src-tauri -> target'
 
       - uses: tauri-apps/tauri-action@v0
-        working-directory: ./packages/tauri
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
