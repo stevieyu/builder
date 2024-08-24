@@ -15,3 +15,9 @@
 	shallow = true
 	branch = main
 	url = https://github.com/wasmerio/winterjs.git
+
+[submodule "restfox"]
+	path = restfox
+	shallow = true
+	branch = main
+	url = https://github.com/flawiddsouza/Restfox.git
