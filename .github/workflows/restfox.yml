@@ -58,7 +58,7 @@ jobs:
           # cache-dependency-path: Restfox\packages\ui\package-lock.json
 
       - name: Build UI
-        working-directory: Restfox\packages\ui
+        working-directory: packages\ui
         run: |
           npm ci
           npm run build-desktop
