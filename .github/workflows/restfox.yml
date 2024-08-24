@@ -60,7 +60,7 @@ jobs:
       - name: run test
         run: |
           pwd
-          ls -al
+          dir
 
       # - name: Build UI
       #   run: |
