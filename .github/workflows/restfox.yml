@@ -61,6 +61,7 @@ jobs:
         with:
           node-version: lts/*
           cache: 'npm'
+          cache-dependency-path: packages/ui/package-lock.json
 
       - name: Build UI
         working-directory: ./packages/ui
