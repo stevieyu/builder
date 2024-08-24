@@ -58,8 +58,8 @@ jobs:
           # cache-dependency-path: Restfox\packages\ui\package-lock.json
 
       - name: Build UI
-        working-directory: packages\ui
         run: |
+          cd packages\ui
           npm ci
           npm run build-desktop
         
@@ -69,8 +69,8 @@ jobs:
           workspaces: './packages/tauri/src-tauri -> target'
 
       - name: Build tauri
-        working-directory: Restfox\packages\tauri
         run: |
+          cd packages\tauri
           npm ci
           npm run build
 
