@@ -58,9 +58,9 @@ jobs:
           # cache-dependency-path: Restfox\packages\ui\package-lock.json
 
       - name: run test
+        working-directory: ./Restfox/packages/ui
         run: |
           pwd
-          dir
 
       # - name: Build UI
       #   run: |
