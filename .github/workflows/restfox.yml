@@ -54,9 +54,11 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: lts/*
+          cache: 'npm'
+          cache-dependency-path: Restfox\packages\ui\package-lock.json
 
       - name: Build UI
-        working-directory: ./packages/ui
+        working-directory: Restfox\packages\ui
         run: |
           npm ci
           npm run build-desktop
@@ -67,7 +69,7 @@ jobs:
           workspaces: './packages/tauri/src-tauri -> target'
 
       - name: Build tauri
-        working-directory: ./packages/tauri
+        working-directory: Restfox\packages\tauri
         run: |
           npm ci
           npm run build
