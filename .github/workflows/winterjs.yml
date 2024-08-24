@@ -40,7 +40,7 @@ jobs:
       #   run: brew install python llvm yasm
         
       - name: Run sccache-cache
-        uses: mozilla-actions/sccache-action@v0.0.4
+        uses: mozilla-actions/sccache-action@v0.0.5
       - name: Build
         run: |
           echo '[profile.release]' >> Cargo.toml
