@@ -70,7 +70,6 @@ jobs:
       - name: Build tauri
         working-directory: ./Restfox/packages/tauri
         run: |
-          sed -i 's/"active": true/"active": false/g' tauri.conf.json
           npm ci
           npm run build
 
