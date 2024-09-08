@@ -54,7 +54,9 @@ jobs:
         with:
           node-version: lts/*
           cache: 'npm'
-          cache-dependency-path: '**/package-lock.json'
+          cache-dependency-path: |
+            Restfox/packages/ui/package-lock.json
+            Restfox/packages/tauri/package-lock.json
         
       - name: Rust cache
         uses: swatinem/rust-cache@v2
