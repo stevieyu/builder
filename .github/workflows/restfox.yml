@@ -55,17 +55,17 @@ jobs:
           node-version: lts/*
           cache: 'npm'
           cache-dependency-path: Restfox\packages\ui\package-lock.json
+        
+      - name: Rust cache
+        uses: swatinem/rust-cache@v2
+        with:
+          workspaces: './Restfox/packages/tauri/src-tauri -> target'
 
       - name: Build UI
         working-directory: ./Restfox/packages/ui
         run: |
           npm ci
           npm run build-desktop
-        
-      - name: Rust cache
-        uses: swatinem/rust-cache@v2
-        with:
-          workspaces: './Restfox/packages/tauri/src-tauri -> target'
 
       - name: Build tauri
         working-directory: ./Restfox/packages/tauri
