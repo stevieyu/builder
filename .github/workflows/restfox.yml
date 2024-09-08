@@ -73,6 +73,14 @@ jobs:
       - name: Build tauri
         working-directory: ./Restfox/packages/tauri
         run: |
+          echo '' >> src-tauri/Cargo.toml
+          echo '[profile.release]' >> src-tauri/Cargo.toml
+          echo 'codegen-units = 1' >> src-tauri/Cargo.toml
+          echo 'lto = true' >> src-tauri/Cargo.toml
+          echo 'opt-level = "s"' >> src-tauri/Cargo.toml
+          echo 'panic = "abort"' >> src-tauri/Cargo.toml
+          echo 'strip = true' >> src-tauri/Cargo.toml
+          cat src-tauri/Cargo.toml
           npm ci
           npm run build
 
