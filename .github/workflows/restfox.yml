@@ -64,8 +64,7 @@ jobs:
       - name: Build UI
         working-directory: ./Restfox/packages/ui
         run: |
-          git tag
-          git log
+          git tag v0.24
           npm ci
           npm run build-desktop
 
