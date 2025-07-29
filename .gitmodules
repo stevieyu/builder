@@ -1,7 +1,2 @@
-[submodule "winterjs"]
-	path = winterjs
-	shallow = true
-	branch = main
-	url = https://github.com/wasmerio/winterjs.git
 
 
