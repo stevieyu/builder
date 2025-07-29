@@ -46,7 +46,7 @@ jobs:
           echo 'strip = true' >> Cargo.toml
           echo 'lto = "fat"' >> Cargo.toml
           echo 'opt-level = "s"' >> Cargo.toml
-          RUSTFLAGS="-C target-cpu=native" cargo build --release
+          cargo build --profile release-compact
 
       # - name: Compress binaries
       #   uses: svenstaro/upx-action@v2
