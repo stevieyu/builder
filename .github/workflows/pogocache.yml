@@ -19,10 +19,10 @@ jobs:
           - ubuntu-20.04
           
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
         with:
           repository: tidwall/pogocache
-          fetch-depth: 1
           
       - name: Build
         run: make
