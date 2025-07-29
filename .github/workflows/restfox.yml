@@ -8,12 +8,7 @@ on:
     branches:
       - 'main'
     paths:
-      - Restfox
       - '**/restfox.yml'
-
-defaults:
-  run:
-    working-directory: Restfox
 
 jobs:
   publish-app:
@@ -35,6 +30,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
+          repository: flawiddsouza/Restfox
           submodules: true
 
       # - name: Install dependencies (ubuntu only)
@@ -55,23 +51,23 @@ jobs:
           node-version: lts/*
           cache: 'npm'
           cache-dependency-path: |
-            Restfox/packages/ui/package-lock.json
-            Restfox/packages/tauri/package-lock.json
+            packages/ui/package-lock.json
+            packages/tauri/package-lock.json
         
       - name: Rust cache
         uses: swatinem/rust-cache@v2
         with:
-          workspaces: './Restfox/packages/tauri/src-tauri -> target'
+          workspaces: './packages/tauri/src-tauri -> target'
 
       - name: Build UI
-        working-directory: ./Restfox/packages/ui
+        working-directory: ./packages/ui
         run: |
           git tag v0.24
           npm ci
           npm run build-desktop
 
       - name: Build tauri
-        working-directory: ./Restfox/packages/tauri
+        working-directory: ./packages/tauri
         run: |
           echo '' >> src-tauri/Cargo.toml
           echo '[profile.release]' >> src-tauri/Cargo.toml
@@ -87,6 +83,6 @@ jobs:
         name: Upload the artifact
         with:
           name: bundle
-          path: Restfox\packages\tauri\src-tauri\target\release\bundle/msi/*.msi
+          path: packages\tauri\src-tauri\target\release\bundle/msi/*.msi
 
 
