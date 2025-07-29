@@ -17,6 +17,10 @@ jobs:
       matrix:
         os:
           - ubuntu-22.04
+    env:
+      SCCACHE_GHA_ENABLED: "true"
+      DCMAKE_C_COMPILER_LAUNCHER: "sccache"
+      DCMAKE_CXX_COMPILER_LAUNCHER: "sccache"
 
     steps:
       - name: Checkout repository
@@ -24,6 +28,9 @@ jobs:
         with:
           repository: tidwall/pogocache
           submodules: true
+
+      - name: Run sccache-cache
+        uses: mozilla-actions/sccache-action@v0.0.9
 
       - name: Build
         run: make
