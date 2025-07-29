@@ -47,5 +47,5 @@ jobs:
         name: Upload the artifact
         with:
           name: vvdec-wasm
-          path: vvdec/bin
+          path: bin
 
