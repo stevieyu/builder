@@ -34,7 +34,7 @@ jobs:
         with:
           files: |
               pogocache
-          args: --best --lzma
+          args: --lzma
           strip: true
       
       - uses: actions/upload-artifact@v4
