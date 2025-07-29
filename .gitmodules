@@ -4,12 +4,6 @@
 	branch = master
 	url = https://github.com/HapticX/happyx.git
 
-[submodule "vvdec"]
-	path = vvdec
-	shallow = true
-	branch = master
-	url = https://github.com/fraunhoferhhi/vvdec.git
-
 [submodule "winterjs"]
 	path = winterjs
 	shallow = true
