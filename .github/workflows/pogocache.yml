@@ -17,10 +17,6 @@ jobs:
       matrix:
         os:
           - ubuntu-22.04
-    env:
-      SCCACHE_GHA_ENABLED: "true"
-      DCMAKE_C_COMPILER_LAUNCHER: "sccache"
-      DCMAKE_CXX_COMPILER_LAUNCHER: "sccache"
 
     steps:
       - name: Checkout repository
@@ -30,11 +26,8 @@ jobs:
           ref: 1.0.2
           submodules: true
 
-      - name: Run sccache-cache
-        uses: mozilla-actions/sccache-action@v0.0.9
-
       - name: Build
-        run: sccache make
+        run: make
 
       - uses: actions/upload-artifact@v4
         name: Upload the artifact
