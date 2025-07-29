@@ -8,12 +8,12 @@ on:
     branches:
       - 'main'
     paths:
-      - vvdec
+      # - vvdec
       - '**/vvdec.yml'
 
-defaults:
-  run:
-    working-directory: vvdec
+# defaults:
+#   run:
+#     working-directory: vvdec
 
 jobs:
   build:
@@ -28,7 +28,8 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          submodules: true
+          repository: fraunhoferhhi/vvdec
+          # submodules: true
 
       - name: Setup cache
         id: cache-system-libraries
