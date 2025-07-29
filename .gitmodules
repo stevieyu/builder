@@ -1,9 +1,3 @@
-[submodule "happyx"]
-	path = happyx
-	shallow = true
-	branch = master
-	url = https://github.com/HapticX/happyx.git
-
 [submodule "winterjs"]
 	path = winterjs
 	shallow = true
@@ -15,8 +9,5 @@
 	shallow = true
 	branch = main
 	url = https://github.com/flawiddsouza/Restfox.git
-[submodule "pogocache"]
-	path = pogocache
-	shallow = true
-	branch = main
-	url = https://github.com/tidwall/pogocache.git
+
+
