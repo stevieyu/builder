@@ -29,6 +29,20 @@ jobs:
           repository: wasmerio/winterjs
           submodules: "recursive"
 
+      - name: OS Setup (Ubuntu)
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y build-essential python3.12 python3-distutils-extra llvm-15 libclang-dev clang-15 wabt
+          npm i -g wasm-opt pnpm concurrently
+          sudo rm /usr/bin/clang
+          sudo rm /usr/bin/clang++
+          sudo ln -s /usr/bin/clang-15 /usr/bin/clang
+          sudo ln -s /usr/bin/clang++-15 /usr/bin/clang++
+          sudo ln -s /usr/bin/llvm-ar-15 /usr/bin/llvm-ar
+          sudo ln -s /usr/bin/llvm-nm-15 /usr/bin/llvm-nm
+          sudo ln -s /usr/bin/llvm-ranlib-15 /usr/bin/llvm-ranlib
+          sudo ln -s /usr/bin/llvm-objdump-15 /usr/bin/llvm-objdump
+
       - name: Install Rust
         uses: dtolnay/rust-toolchain@master
         with:
