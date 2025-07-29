@@ -28,7 +28,15 @@ jobs:
 
       - name: Build
         run: make
-
+        
+      - name: Compress binaries
+        uses: svenstaro/upx-action@v2
+        with:
+          files: |
+              pogocache
+          args: --best --lzma
+          strip: true
+      
       - uses: actions/upload-artifact@v4
         name: Upload the artifact
         with:
