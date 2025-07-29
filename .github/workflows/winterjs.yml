@@ -59,6 +59,9 @@ jobs:
           echo 'strip = true' >> Cargo.toml
           echo 'lto = "fat"' >> Cargo.toml
           echo 'opt-level = "s"' >> Cargo.toml
+          rustup update stable
+          rm Cargo.lock
+          cargo generate-lockfile
           cargo build --profile release-compact
 
       # - name: Compress binaries
