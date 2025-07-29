@@ -29,11 +29,11 @@ jobs:
           repository: wasmerio/winterjs
           submodules: "recursive"
 
-      - uses: dtolnay/rust-toolchain@stable
-      - name: Set up Clang
-        uses: egor-tensin/setup-clang@v1
-      # - name: macos Install deps
-      #   run: brew install python llvm yasm
+      - name: Install Rust
+        uses: dtolnay/rust-toolchain@master
+        with:
+          toolchain: "1.76"
+          components: "clippy,rustfmt"
         
       - name: Run sccache-cache
         uses: mozilla-actions/sccache-action@v0.0.9
