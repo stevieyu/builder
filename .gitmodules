@@ -21,3 +21,8 @@
 	shallow = true
 	branch = main
 	url = https://github.com/flawiddsouza/Restfox.git
+[submodule "pogocache"]
+	path = pogocache
+	shallow = true
+	branch = main
+	url = https://github.com/tidwall/pogocache.git

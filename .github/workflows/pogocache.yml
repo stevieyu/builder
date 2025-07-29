@@ -6,9 +6,10 @@ permissions:
 on:
   push:
     branches:
-      - 'main'
+      - "main"
     paths:
-      - '**/pogocache.yml'
+      - pogocache
+      - "**/pogocache.yml"
 
 jobs:
   build:
@@ -17,13 +18,13 @@ jobs:
       matrix:
         os:
           - ubuntu-20.04
-          
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          repository: tidwall/pogocache
-          
+          submodules: true
+
       - name: Build
         run: make
 
@@ -31,4 +32,3 @@ jobs:
         name: Upload the artifact
         with:
           path: pogocache
-    
