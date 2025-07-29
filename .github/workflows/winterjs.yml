@@ -8,12 +8,7 @@ on:
     branches:
       - 'main'
     paths:
-      - winterjs
       - '**/winterjs.yml'
-
-defaults:
-  run:
-    working-directory: winterjs
 
 jobs:
   build:
@@ -31,7 +26,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          submodules: true
+          repository: wasmerio/winterjs
 
       - uses: dtolnay/rust-toolchain@stable
       - name: Set up Clang
