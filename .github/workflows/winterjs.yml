@@ -62,6 +62,7 @@ jobs:
           rustup update stable
           rm Cargo.lock
           cargo generate-lockfile
+          cargo tree | grep libc
           cargo build --profile release-compact
 
       # - name: Compress binaries
