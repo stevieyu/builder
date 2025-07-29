@@ -30,10 +30,11 @@ jobs:
           submodules: "recursive"
 
       - name: Install Rust
-        uses: dtolnay/rust-toolchain@master
-        with:
-          toolchain: "1.76"
-          components: "clippy,rustfmt"
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Install deps
+        run: |
+          sudo apt install llvm -y
         
       - name: Run sccache-cache
         uses: mozilla-actions/sccache-action@v0.0.9
@@ -45,7 +46,6 @@ jobs:
           echo 'strip = true' >> Cargo.toml
           echo 'lto = "fat"' >> Cargo.toml
           echo 'opt-level = "s"' >> Cargo.toml
-          rm Cargo.lock
           RUSTFLAGS="-C target-cpu=native" cargo build --release
 
       # - name: Compress binaries
