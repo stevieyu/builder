@@ -45,7 +45,7 @@ jobs:
           echo 'strip = true' >> Cargo.toml
           echo 'lto = "fat"' >> Cargo.toml
           echo 'opt-level = "s"' >> Cargo.toml
-          cargo update
+          rm Cargo.lock
           RUSTFLAGS="-C target-cpu=native" cargo build --release
 
       # - name: Compress binaries
