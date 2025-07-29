@@ -8,12 +8,8 @@ on:
     branches:
       - 'main'
     paths:
-      - happyx
       - '**/happyx.yml'
 
-defaults:
-  run:
-    working-directory: happyx
 
 jobs:
   build:
@@ -31,7 +27,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          submodules: true
+          repository: HapticX/happyx
+          submodules: "recursive"
+
       - name: Cache nimble
         id: cache-nimble
         uses: actions/cache@v4
@@ -69,7 +67,7 @@ jobs:
         name: Upload the artifact
         with:
           name: happyx.so
-          path: happyx/bindings/python/happyx/happyx.so
+          path: bindings/python/happyx/happyx.so
 
       # - name: Build Package 🏗
       #   run: |
