@@ -62,7 +62,6 @@ jobs:
       - name: Build UI
         working-directory: ./packages/ui
         run: |
-          git tag v0.24
           npm ci
           npm run build-desktop
 
