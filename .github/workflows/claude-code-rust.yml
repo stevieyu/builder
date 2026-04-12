@@ -15,8 +15,17 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os:
-          - ubuntu-24.04
+        os: [ubuntu-latest]
+        include:
+          - os: ubuntu-latest
+            target: x86_64-unknown-linux-gnu
+            binary_name: claude_code_rs
+          - os: windows-latest
+            target: x86_64-pc-windows-msvc
+            binary_name: claude_code_rs.exe
+          - os: macos-latest
+            target: x86_64-apple-darwin
+            binary_name: claude_code_rs
   
     steps:
       - uses: actions/checkout@v4
