@@ -1,4 +1,4 @@
-name: vvdec wasm build
+name: claude-code-rust build
 
 permissions:
   contents: read
