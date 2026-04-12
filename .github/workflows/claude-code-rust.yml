@@ -28,7 +28,8 @@ jobs:
 
       - name: 构建 Release 版本
         run: |
-          rustc --version
+          rustc --version --verbose
+          cargo --version --verbose
           cargo build --release
           
       - uses: actions/upload-artifact@v7
