@@ -22,17 +22,18 @@ jobs:
             binary_name: claude_code_rs
   
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         with:
           repository: lorryjovens-hub/claude-code-rust
 
       - name: install Rust stable
         uses: dtolnay/rust-toolchain@stable
+      - uses: Swatinem/rust-cache@v2
 
       - name: 构建 Release 版本
-        run: cargo build --release
+        run: cargo build --release && ls -al target
           
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         name: Upload the artifact
         with:
           name: ${{ matrix.os }}-binary
