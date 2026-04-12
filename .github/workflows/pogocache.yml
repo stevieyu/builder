@@ -16,11 +16,11 @@ jobs:
     strategy:
       matrix:
         os:
-          - ubuntu-22.04
+          - ubuntu-24.04
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           repository: tidwall/pogocache
           ref: 1.0.3
@@ -37,7 +37,7 @@ jobs:
           args: --lzma
           strip: true
       
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         name: Upload the artifact
         with:
           name: pogocache
