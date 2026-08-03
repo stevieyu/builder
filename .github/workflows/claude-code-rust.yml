@@ -1,4 +1,4 @@
-name: claude-code-rust build
+name: draco build
 
 permissions:
   contents: read
@@ -21,7 +21,7 @@ jobs:
     steps:
       - uses: actions/checkout@v6
         with:
-          repository: lorryjovens-hub/claude-code-rust
+          repository: 0xchasercat/draco
 
       - name: install Rust stable
         uses: dtolnay/rust-toolchain@stable
@@ -31,10 +31,10 @@ jobs:
         run: |
           rustc --version --verbose
           cargo --version --verbose
-          cargo build --release
+          cargo build --locked --release --verbose --package draco-cli
           
       - uses: actions/upload-artifact@v7
         name: Upload the artifact
         with:
           name: ${{ matrix.os }}-binary
-          path: target/release/claude-code
+          path: crates/draco-cli/target/release/draco-cli
