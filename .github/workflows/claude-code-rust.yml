@@ -32,11 +32,9 @@ jobs:
           rustc --version --verbose
           cargo --version --verbose
           cargo build --locked --release --verbose --package draco-cli
-          ls -al target/release
-          ls -al crates/draco-cli
           
       - uses: actions/upload-artifact@v7
         name: Upload the artifact
         with:
           name: ${{ matrix.os }}-binary
-          path: crates/draco-cli/target/release/draco-cli
+          path: target/release/draco
