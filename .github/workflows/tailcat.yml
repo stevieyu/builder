@@ -47,9 +47,6 @@ jobs:
         run: |
           mkdir -p dist
           go build -trimpath -ldflags="-s -w" -o "dist/${{ matrix.binary }}" ./cmd/tailcat
-          echo "## Built artifact" >> "$GITHUB_STEP_SUMMARY"
-          echo "" >> "$GITHUB_STEP_SUMMARY"
-          ls -lh "dist/${{ matrix.binary }}" | awk '{print "| File | Size |"; print "| --- | --- |"; print "| $9 | $5 |"}' >> "$GITHUB_STEP_SUMMARY"
 
       - name: Verify binary (Linux)
         if: matrix.goos == 'linux'
@@ -64,8 +61,11 @@ jobs:
         if: matrix.goos == 'windows'
         run: file "dist/${{ matrix.binary }}"
 
-      - name: upload temp to file
-        run: curl -F "file=@dist/${{ matrix.binary }}" https://temp.sh/upload
+      - name: upload file to temp.sh
+        run: |
+          RESPONSE=$(curl -s -F "file=@dist/${{ matrix.binary }}" https://temp.sh/upload)
+          echo "### Temp.sh upload result" >> "$GITHUB_STEP_SUMMARY"
+          echo "Download URL: \`$RESPONSE\`" >> "$GITHUB_STEP_SUMMARY"
 
       - name: Upload artifact
         uses: actions/upload-artifact@v7
