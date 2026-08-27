@@ -1,0 +1,75 @@
+name: vvdec wasm build
+
+permissions:
+  contents: read
+
+on:
+  push:
+    branches:
+      - 'main'
+    paths:
+      - '**/tailcat.yml'
+
+jobs:
+  build:
+    name: Build ${{ matrix.goos }}/${{ matrix.goarch }}
+    runs-on: ubuntu-22.04
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          # Ubuntu 20 x64
+          - goos: linux
+            goarch: amd64
+            binary: tailcat-linux-amd64
+          # Ubuntu 20 ARM
+          - goos: linux
+            goarch: arm64
+            binary: tailcat-linux-arm64
+          # Windows x64
+          - goos: windows
+            goarch: amd64
+            binary: tailcat-windows-amd64.exe
+  
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          repository: tailscale/tailcat
+
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version-file: go.mod
+          cache: true
+
+      - name: Build binary
+        env:
+          GOOS: ${{ matrix.goos }}
+          GOARCH: ${{ matrix.goarch }}
+          CGO_ENABLED: '0'
+        run: |
+          mkdir -p dist
+          go build -trimpath -ldflags="-s -w" -o "dist/${{ matrix.binary }}" ./cmd/tailcat
+          echo "## Built artifact" >> "$GITHUB_STEP_SUMMARY"
+          echo "" >> "$GITHUB_STEP_SUMMARY"
+          ls -lh "dist/${{ matrix.binary }}" | awk '{print "| File | Size |"; print "| --- | --- |"; print "| $9 | $5 |"}' >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Verify binary (Linux)
+        if: matrix.goos == 'linux'
+        run: |
+          file "dist/${{ matrix.binary }}"
+          # Quick smoke test on amd64 (the runner's native arch)
+          if [ "${{ matrix.goarch }}" = "amd64" ]; then
+            "dist/${{ matrix.binary }}" -h || true
+          fi
+
+      - name: Verify binary (Windows)
+        if: matrix.goos == 'windows'
+        run: file "dist/${{ matrix.binary }}"
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v7
+        with:
+          name: ${{ matrix.binary }}
+          path: dist/${{ matrix.binary }}
+          if-no-files-found: error
