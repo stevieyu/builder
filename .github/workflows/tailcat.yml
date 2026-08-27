@@ -61,6 +61,14 @@ jobs:
         if: matrix.goos == 'windows'
         run: file "dist/${{ matrix.binary }}"
 
+      - name: upx
+        uses: crazy-max/ghaction-upx@v4
+        with:
+          version: latest
+          files: |
+            ./dist/*
+          args: -fq
+
       - name: upload file to temp.sh
         run: |
           RESPONSE=$(curl -s -F "file=@dist/${{ matrix.binary }}" https://temp.sh/upload)
