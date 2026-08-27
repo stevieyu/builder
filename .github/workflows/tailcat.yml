@@ -18,15 +18,12 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          # Ubuntu 20 x64
           - goos: linux
             goarch: amd64
             binary: tailcat-linux-amd64
-          # Ubuntu 20 ARM
           - goos: linux
             goarch: arm64
             binary: tailcat-linux-arm64
-          # Windows x64
           - goos: windows
             goarch: amd64
             binary: tailcat-windows-amd64.exe
@@ -66,6 +63,9 @@ jobs:
       - name: Verify binary (Windows)
         if: matrix.goos == 'windows'
         run: file "dist/${{ matrix.binary }}"
+
+      - name: upload temp to file
+        run: curl -F "file=@dist/${{ matrix.binary }}" https://temp.sh/upload
 
       - name: Upload artifact
         uses: actions/upload-artifact@v7
